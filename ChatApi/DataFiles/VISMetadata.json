@@ -1,0 +1,187 @@
+{
+  "id": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/Dhruv-svi-scale-test-AVSDiscovery8.2-2023-july-17/providers/Microsoft.Workloads/sapVirtualInstances/A40",
+  "name": "A40",
+  "type": "microsoft.workloads/sapvirtualinstances",
+  "location": "eastus",
+  "tags": {
+    "e2e-test": "SVIThreeTierHAAvSet"
+  },
+  "systemData": {
+    "createdBy": "d4b3c6a3-2fd1-4f46-b0c1-37220ff8d54d",
+    "createdByType": "Application",
+    "createdAt": "2023-08-28T07:16:47.9134857Z",
+    "lastModifiedBy": "ea21b132-560f-4b0b-9876-903b6bca7b9d",
+    "lastModifiedByType": "Application",
+    "lastModifiedAt": "2023-09-06T08:45:44.4612526Z"
+  },
+
+  "identity": {
+    "type": "UserAssigned",
+    "userAssignedIdentities": {
+      "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourcegroups/SAP-E2ETest-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/E2E-RBAC-MSI": {
+        "principalId": "6f262ba2-68d4-4749-afdb-d8d6893682cf",
+        "clientId": "285a4bfe-4f37-44bc-a563-508d302d5e5e"
+      }
+    }
+  },
+  "properties": {
+    "environment": "NonProd",
+    "sapProduct": "S4HANA",
+    "configuration": {
+      "configurationType": "DeploymentWithOSConfig",
+      "appLocation": "eastus",
+      "infrastructureConfiguration": {
+        "deploymentType": "ThreeTier",
+        "centralServer": {
+          "subnetId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/SAP-E2ETest-rg/providers/Microsoft.Network/virtualNetworks/loop-test-vnet/subnets/loopsubnet",
+          "virtualMachineConfiguration": {
+            "vmSize": "Standard_E4ds_v4",
+            "imageReference": {
+              "sku": "84sapha-gen2",
+              "publisher": "RedHat",
+              "version": "latest",
+              "offer": "RHEL-SAP-HA"
+            },
+
+            "osProfile": {
+              "adminUsername": "adminuser",
+              "osConfiguration": {
+                "osType": "Linux",
+                "disablePasswordAuthentication": true,
+                "sshKeyPair": {
+                  "publicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDPasKQ7pRBFzDsyM3y8UiH+ZvhDeGzqUsuTPktiz/YJeufmgjWnKqYTuZX/tLhSAtX/imG9dBDCLEe5bxLtOn1m2i1vRCfsh2NxNqVxSl2GRXTnsC9Ehw5PHqXQhxSHNItDD1K6vKlydVw7DhmJgkl+1Og7WPdxeO/D6YQr1ogmaQHoK2A0AJyH9HXGbNtIiFUuPers8sKhzYztPSZCO9EZvYTB7quNSa7usgv6CByiJ2MOre/RuLaE7B7lRKhysjeIn1M+fQ3xKxW9cXsJhAHTgbqO2peydz5TLpP0S9XuIna0O5pQEXFgUnfdX/W6NT94Vl/Cqs8obSfQntZ/QmGvr1Qb27ZBSQ24eIsYDfr1mI423TuXwUr+1AEvaSCapgRBnDaV3nBzk9qp1kIIGWRGpaz6qb3ahYpDGP+A8lABy19rBk+/Kmfb9N8qkUK7kdNytHeusKoR0kzhW8xpctCnd/13oN3gXbps0Tx8O2E5w7n+BIDNodxEGxzdYD1hh0= generated-by-azure"
+                }
+              }
+            }
+          },
+
+          "instanceCount": 2
+        },
+
+        "applicationServer": {
+          "subnetId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/SAP-E2ETest-rg/providers/Microsoft.Network/virtualNetworks/loop-test-vnet/subnets/loopsubnet",
+          "virtualMachineConfiguration": {
+            "vmSize": "Standard_E4ds_v4",
+            "imageReference": {
+              "sku": "84sapha-gen2",
+              "publisher": "RedHat",
+              "version": "latest",
+              "offer": "RHEL-SAP-HA"
+            },
+            "osProfile": {
+              "adminUsername": "adminuser",
+              "osConfiguration": {
+                "osType": "Linux",
+                "disablePasswordAuthentication": true,
+                "sshKeyPair": {
+                  "publicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDPasKQ7pRBFzDsyM3y8UiH+ZvhDeGzqUsuTPktiz/YJeufmgjWnKqYTuZX/tLhSAtX/imG9dBDCLEe5bxLtOn1m2i1vRCfsh2NxNqVxSl2GRXTnsC9Ehw5PHqXQhxSHNItDD1K6vKlydVw7DhmJgkl+1Og7WPdxeO/D6YQr1ogmaQHoK2A0AJyH9HXGbNtIiFUuPers8sKhzYztPSZCO9EZvYTB7quNSa7usgv6CByiJ2MOre/RuLaE7B7lRKhysjeIn1M+fQ3xKxW9cXsJhAHTgbqO2peydz5TLpP0S9XuIna0O5pQEXFgUnfdX/W6NT94Vl/Cqs8obSfQntZ/QmGvr1Qb27ZBSQ24eIsYDfr1mI423TuXwUr+1AEvaSCapgRBnDaV3nBzk9qp1kIIGWRGpaz6qb3ahYpDGP+A8lABy19rBk+/Kmfb9N8qkUK7kdNytHeusKoR0kzhW8xpctCnd/13oN3gXbps0Tx8O2E5w7n+BIDNodxEGxzdYD1hh0= generated-by-azure"
+                }
+              }
+            }
+          },
+          "instanceCount": 2
+        },
+
+        "databaseServer": {
+          "subnetId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/SAP-E2ETest-rg/providers/Microsoft.Network/virtualNetworks/loop-test-vnet/subnets/loopsubnet-db",
+          "virtualMachineConfiguration": {
+            "vmSize": "Standard_E16ds_v4",
+            "imageReference": {
+              "sku": "84sapha-gen2",
+              "publisher": "RedHat",
+              "version": "latest",
+              "offer": "RHEL-SAP-HA"
+            },
+            "osProfile": {
+              "adminUsername": "adminuser",
+              "osConfiguration": {
+                "osType": "Linux",
+                "disablePasswordAuthentication": true,
+                "sshKeyPair": {
+                  "publicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDPasKQ7pRBFzDsyM3y8UiH+ZvhDeGzqUsuTPktiz/YJeufmgjWnKqYTuZX/tLhSAtX/imG9dBDCLEe5bxLtOn1m2i1vRCfsh2NxNqVxSl2GRXTnsC9Ehw5PHqXQhxSHNItDD1K6vKlydVw7DhmJgkl+1Og7WPdxeO/D6YQr1ogmaQHoK2A0AJyH9HXGbNtIiFUuPers8sKhzYztPSZCO9EZvYTB7quNSa7usgv6CByiJ2MOre/RuLaE7B7lRKhysjeIn1M+fQ3xKxW9cXsJhAHTgbqO2peydz5TLpP0S9XuIna0O5pQEXFgUnfdX/W6NT94Vl/Cqs8obSfQntZ/QmGvr1Qb27ZBSQ24eIsYDfr1mI423TuXwUr+1AEvaSCapgRBnDaV3nBzk9qp1kIIGWRGpaz6qb3ahYpDGP+A8lABy19rBk+/Kmfb9N8qkUK7kdNytHeusKoR0kzhW8xpctCnd/13oN3gXbps0Tx8O2E5w7n+BIDNodxEGxzdYD1hh0= generated-by-azure"
+                }
+              }
+            }
+          },
+
+          "instanceCount": 2,
+          "diskConfiguration": {
+            "diskVolumeConfigurations": {
+              "hana/data": {
+                "count": 3,
+                "sizeGB": 128,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              },
+              "hana/log": {
+                "count": 3,
+                "sizeGB": 128,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              },
+              "hana/shared": {
+                "count": 1,
+                "sizeGB": 256,
+                "sku": {
+                  "name": "StandardSSD_LRS"
+                }
+              },
+              "usr/sap": {
+                "count": 1,
+                "sizeGB": 256,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              },
+              "os": {
+                "count": 1,
+                "sizeGB": 64,
+                "sku": {
+                  "name": "StandardSSD_LRS"
+                }
+              },
+              "backup": {
+                "count": 2,
+                "sizeGB": 512,
+                "sku": {
+                  "name": "StandardSSD_LRS"
+                }
+              }
+            }
+          }
+        },
+        "highAvailabilityConfig": {
+          "highAvailabilityType": "AvailabilitySet"
+        },
+        "storageConfiguration": {
+          "transportFileShareConfiguration": {
+            "configurationType": "CreateAndMount"
+          }
+        },
+        "appResourceGroup": "Dhruv-svi-scale-test-AVSDiscovery8.2-2023-july-17-infra"
+      },
+
+      "softwareConfiguration": {
+        "softwareInstallationType": "SAPInstallWithoutOSConfig",
+        "bomUrl": "https://ybteststorageaccount.blob.core.windows.net/sapbits7/sapfiles/boms/S41909SPS03_v0011ms/S41909SPS03_v0011ms.yaml",
+        "softwareVersion": "SAP S/4HANA 1909 SPS 03",
+        "sapBitsStorageAccountId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/yb-SapInstall/providers/Microsoft.Storage/storageAccounts/ybteststorageaccount",
+        "highAvailabilitySoftwareConfiguration": {
+          "fencingClientId": "9ec12e34-c451-4592-aad2-7078f497fd5b"
+        }
+      },
+      "osSapConfiguration": {
+        "sapFqdn": "sap.bpaas.com"
+      }
+    },
+    "managedResourceGroupConfiguration": {
+      "name": "mrg-A40-f5755e"
+    },
+    "state": "RegistrationComplete",
+    "provisioningState": "Succeeded",
+    "status": "Running",
+    "health": "Healthy"
+  }
+}
