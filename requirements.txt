@@ -4,3 +4,5 @@
 
 azure-functions
 openai
+azure-storage-blob
+python-docx

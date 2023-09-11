@@ -2,13 +2,16 @@ import openai
 import azure.functions as func
 import json
 import os
+from azure.storage.blob import BlobServiceClient
+from docx import Document
+
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     openai.api_type = "azure"
     openai.api_base = "https://ado-openai.openai.azure.com/"
     openai.api_version = "2023-03-15-preview"
     openai.api_key = "045d4425d72a49d896f52a734ace9e38"
-    chat_reply = get_chat_response()
+    chat_reply = get_chat_response_new()
     return func.HttpResponse(chat_reply)
 
 def get_chat_metadata() -> str:
@@ -25,6 +28,48 @@ def get_chat_metadata() -> str:
     # Convert the loaded JSON data to a string
     json_string = json.dumps(data, indent=4)
     return json_string
+
+def read_data_from_az_storage() -> str:
+    # Define your Azure Storage Account connection string
+    connection_string = "DefaultEndpointsProtocol=https;AccountName=acsscopilotstorage;AccountKey=irIgLwt4dqEGrtakYyzFaUXFmQSL72M8HB5OynKNwPW3SvUrt0haTTqQiukqCM6UU3rCE4KRiz27+AStNRLFbg==;EndpointSuffix=core.windows.net"
+    # Define the container name and blob (file) name
+    container_name = "fileupload-acsstsgword"
+    blob_name = "TestTSGData.docx"
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    parent_directory = os.path.join(current_directory, 'TSG')
+    local_file_path = os.path.join(parent_directory, '1.docx')
+    blob_service_client = BlobServiceClient.from_connection_string(connection_string)
+    container_client = blob_service_client.get_container_client(container_name)
+    blob_client = container_client.get_blob_client(blob_name)
+    with open(local_file_path, "wb") as local_file:
+         blob_data = blob_client.download_blob()
+         blob_data.readinto(local_file)
+    doc = Document(local_file_path)
+    text = ""
+    for paragraph in doc.paragraphs:
+        text += paragraph.text + "\n"
+    return text
+
+
+def get_chat_response_new() -> str:
+    try:
+        # response_data = get_chat_metadata()
+        response_data = read_data_from_az_storage()
+        # Define the input messages
+        input_messages = [
+            {"role": "assistant", "content": response_data},
+            {"role": "user", "content": "What is the root cause for PrivateEndpointCannotBeCreatedInSubnetThatHasNetworkPoliciesEnabled"}
+        ]
+        # Call chat endpoint
+        response = openai.ChatCompletion.create(
+            engine="test-deployment",
+            messages=input_messages
+        )
+        # Get the response from the chat endpoint
+        instance_reply = response['choices'][0]['message']['content']
+        return instance_reply
+    except Exception as err:
+        print(err)
 
 def get_chat_response() -> str:
     try:
