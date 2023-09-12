@@ -8,10 +8,13 @@ class AzCogSearch():
         self.search_service_endpoint = "https://acsscognitivesearch.search.windows.net"
         self.admin_api_key = "yBSF8UjVARbVva6noCnlMUCFGXcUvsZF3QYKW4f8zIAzSeDi1TvP"
         self.index_name = "acsstsgword"
-
-    def search_data(self) -> list:
         # create an empty list to store the search results
         self.search_results = []
+        self.search_client = None
+        self.search_query = None
+        self.results = None
+
+    def search_data(self) -> list:
         # Create a search_client
         self.search_client = SearchClient(
             endpoint=self.search_service_endpoint,
