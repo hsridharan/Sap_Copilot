@@ -6,3 +6,4 @@ azure-functions
 openai
 azure-storage-blob
 python-docx
+azure-search-documents
