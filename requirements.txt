@@ -4,4 +4,4 @@
 
 azure-functions
 openai
-azure-search-documents
+azure-search-documents==11.4.0b3
