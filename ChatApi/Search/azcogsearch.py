@@ -23,8 +23,7 @@ class AzCogSearch():
         # Define your search query
         self.search_query = self.user_query
         # Execute the search query
-        self.results = self.search_client.search(search_text=self.search_query)
-        # Print the search results
+        self.results = self.search_client.search(search_text=self.search_query,search_mode="any")
         for result in self.results:
             self.search_results.append(result['content'])
         return self.search_results

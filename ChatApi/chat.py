@@ -18,11 +18,14 @@ class AzChat():
 
     def get_chat_response(self) -> str:
         try:
+            system_prompt = "I am search engine for Azure center for SAP Solutions (ACSS)."
             # Define the input messages
             input_messages = [
                 {"role": "assistant", "content": self.response_data_str},
-                {"role": "user", "content": self.user_query}
+                {"role": "user", "content": self.user_query},
+                {"role": "system", "content": system_prompt},
             ]
+
             # Call chat endpoint
             self.response = openai.ChatCompletion.create(
                 engine="test-deploy",
